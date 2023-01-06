@@ -36,6 +36,14 @@ router.get("/status/fetch", (req, res) => {
   });
 });
 
+router.put("/click/:projectId", (req, res) => {
+  const { projectId } = req.params;
+  console.log(projectId)
+  projectController.incrementClick(projectId).then((response) => {
+    res.send(response);
+  });
+});
+
 router.post("/status/:projectId/create", (req, res) => {
   const { remarks, statusId } = req.body;
   const { projectId } = req.params;

@@ -66,7 +66,7 @@ const createProjectFileUpload = (projectId, file) => {
 };
 
 const fetchProjectAsAdmin = () => {
-  const query = `SELECT project_id, project_name, project_description, project.users_id, project.employee_id, start_date, end_date, date_created, project.status_id,
+  const query = `SELECT project_id, project_name, project_description, click, project.users_id, project.employee_id, start_date, end_date, date_created, project.status_id,
     users.first_name, users.last_name,
     status.status_acr, status.status_name
     FROM project
@@ -207,6 +207,17 @@ const createQoutationDetails = (
       0,
       0,
     ],
+  };
+};
+
+const incrementClick = (
+  projectId
+) => {
+  const query = `UPDATE project set click = click + 1 where project_id = ?
+  `;
+  return {
+    sql: query,
+    values: [projectId],
   };
 };
 
@@ -390,5 +401,6 @@ module.exports = {
   updateProjectStatus,
   showQoutation,
   updateDoneProjectStatus,
-  fetchEmployees
+  fetchEmployees,
+  incrementClick
 };

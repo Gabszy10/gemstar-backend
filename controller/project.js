@@ -70,6 +70,10 @@ const fetchStatus = () => {
   return executeScript(projectQuery.fetchStatus());
 };
 
+const incrementClick = (projectId) => {
+  return executeScript(projectQuery.incrementClick(projectId));
+};
+
 const createProjectStatus = (projectId, usersId, statusId, remarks) => {
   executeScript(projectQuery.updateProjectStatus(statusId, projectId));
   return executeScript(
@@ -225,5 +229,6 @@ module.exports = {
   finalizeQoutation,
   showQoutation,
   doneProjectStatus,
-  fetchEmployees
+  fetchEmployees,
+  incrementClick
 };
