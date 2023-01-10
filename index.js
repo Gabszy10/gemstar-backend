@@ -14,7 +14,7 @@ try {
 
   app.use(bodyParser.json({ limit: '50mb' }));
   app.use(bodyParser.urlencoded({ extended: true }));
-  const whitelist = ['https://nimble-blancmange-426fdb.netlify.app', 'https://gemstar-engineering-services.netlify.app', 'http://localhost:3000'];
+  const whitelist = ['https://polite-trifle-216628.netlify.app', 'https://gemstar-engineering-services.netlify.app', 'http://localhost:3000'];
   const corsOptions = {
     credentials: true, // This is important.
     origin: (origin, callback) => {
@@ -24,7 +24,7 @@ try {
         callback(new Error('Not allowed by CORS'));
     }
   }
-  app.use(cors(corsOptions));
+  app.use(cors({ origin: true, credentials: true }));
 
   app.get('/', (req, res) => {
     res.send('Server is Running');
