@@ -196,6 +196,7 @@ router.get("/fetch/list", (req, res) => {
 
 router.get("/fetch/:projectId", (req, res) => {
   const { projectId } = req.params;
+  let assignedEmployees = []
   Promise.all([
     projectController.fetchProjectDetails(projectId),
     projectController.fetchProjectFiles(projectId),
@@ -203,7 +204,7 @@ router.get("/fetch/:projectId", (req, res) => {
     projectController.fetchQuotationDetails(projectId),
     projectController.fetchProjectStatus(projectId),
   ]).then(
-    ([
+    async ([
       projectDetails,
       projectFiles,
       projectComments,
@@ -213,7 +214,19 @@ router.get("/fetch/:projectId", (req, res) => {
       if(!projectDetails.employee_id){
         projectDetails.employee_id = JSON.stringify(['']);
       }
-      projectController.fetchEmployees(JSON.parse(projectDetails.employee_id).map(a => a.id)).then(assignedEmployees => {
+
+      for (let j = 0; j < JSON.parse(projectDetails.employee_id).length; j++) {
+        await projectController.fetchEmployees(JSON.parse(projectDetails.employee_id)[j].id).then(employee => {
+          console.log("HERE", JSON.parse(projectDetails.employee_id)[j].id)
+          assignedEmployees.push({...employee[0], assignedDate: JSON.parse(projectDetails.employee_id)[j].date})
+        });
+      
+      }
+
+
+        // if(j == JSON.parse(projectDetails.employee_id).length){
+        
+        // }
         console.log(assignedEmployees)
         projectDetails['assignedEmployees'] = assignedEmployees;
         res.send({
@@ -224,7 +237,6 @@ router.get("/fetch/:projectId", (req, res) => {
           projectQuotation,
           projectStatus,
         });
-      })
     }
   );
 });

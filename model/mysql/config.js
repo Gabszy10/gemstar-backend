@@ -13,7 +13,7 @@ const pool = mysql
     return conn;
   })
   .catch((err) => {
-    console.log(err);
+    // console.log(err);
     console.error(chalk.red("MYSQL database connection error"));
   });
 
