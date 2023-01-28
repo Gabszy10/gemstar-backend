@@ -81,7 +81,7 @@ const fetchProjectAsAdmin = () => {
 };
 
 const fetchProject = (userId) => {
-  const query = `SELECT project_id, project_name, project_description, project.users_id, start_date, end_date, date_created, project.status_id,
+  const query = `SELECT project_id, project_name, click, project_description, project.users_id, start_date, end_date, date_created, project.status_id,
     users.first_name, users.last_name,
     status.status_acr, status.status_name
     FROM project
@@ -98,7 +98,7 @@ const fetchProject = (userId) => {
 
 const fetchProjectEmployee = (userId) => {
   userId;
-  const query = `SELECT project_id, project_name, project_description, project.users_id, start_date, end_date, date_created, project.status_id,
+  const query = `SELECT project_id, project_name, click, project_description, project.users_id, start_date, end_date, date_created, project.status_id,
     users.first_name, users.last_name,
     status.status_acr, status.status_name
     FROM project
