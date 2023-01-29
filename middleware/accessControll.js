@@ -13,6 +13,7 @@ module.exports = {
     const { body, params, session } = req;
     if (req.headers.user_cookie) {
     const props = { ...body, ...params };
+    console.clear();
     logsTemplate[LOGTYPE](props, LOGTYPE, JSON.parse(req.headers.user_cookie).users_id || null);
     next();
     }

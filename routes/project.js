@@ -44,6 +44,15 @@ router.put("/click/:projectId", (req, res) => {
   });
 });
 
+router.put("/status/update/:projectId", (req, res) => {
+  const { projectId } = req.params;
+  const { statusId } = req.body;
+  console.log(projectId)
+  projectController.updateProjectStatus(projectId, statusId).then((response) => {
+    res.send(response);
+  });
+});
+
 router.post("/status/:projectId/create", (req, res) => {
   const { remarks, statusId } = req.body;
   const { projectId } = req.params;

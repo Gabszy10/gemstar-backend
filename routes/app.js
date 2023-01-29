@@ -12,7 +12,7 @@ router.post("/carousel-upload",uploadCarousel.single("filename"),(req, res) => {
   if(error) return res.status(400).send({ message: error.details[0].message });
 
   const filename = req.file.filename;
-  const url = 'https' + '://' + req.get('host')
+  const url = 'http' + '://' + req.get('host')
   const filepath = url + '/carousel/'+ filename;
   const { users_id } = JSON.parse(req.headers.user_cookie);
   const carouselData = {
