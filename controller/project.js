@@ -16,7 +16,7 @@ const createProject = (props) => {
     project_description,
     start_date,
     end_date,
-    userId,
+    users_id,
   } = props;
   return executeScript(
     projectQuery.createProject(
@@ -25,7 +25,7 @@ const createProject = (props) => {
       project_description,
       start_date,
       end_date,
-      userId
+      users_id
     )
   );
 };

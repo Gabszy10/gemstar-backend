@@ -11,9 +11,10 @@ module.exports = {
   },
   loggerModule: (LOGTYPE) => (req, res, next) => {
     const { body, params, session } = req;
-    // console.log(req)
+    if (req.headers.user_cookie) {
     const props = { ...body, ...params };
-    logsTemplate[LOGTYPE](props, LOGTYPE, session.user || null);
+    logsTemplate[LOGTYPE](props, LOGTYPE, JSON.parse(req.headers.user_cookie).users_id || null);
     next();
+    }
   },
 };
